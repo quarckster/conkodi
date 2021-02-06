@@ -17,7 +17,7 @@ RUN apt install -y --no-install-recommends dumb-init \
                                            tigervnc-standalone-server \
                                            tigervnc-xorg-extension \
                                            kodi=2:${KODI_VERSION}+* && \
-    apt -y --purge autoremove
+    apt -y --purge autoremove && \
     useradd -m -s /bin/bash kodi
 
 COPY start.sh /

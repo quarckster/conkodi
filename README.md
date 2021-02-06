@@ -17,7 +17,7 @@ Kodi GUI. It's not supposed to play video and audio.
 2. Run it:  
 
     ```sh
-    podman run --rm -p 5999:5999 -p  localhost/kodi
+    podman run --rm -p 5999:5999 -p 8080:8080 localhost/kodi
     ```
 
 3. Use any VNC viewer to get access to X session, e.g.:

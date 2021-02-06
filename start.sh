@@ -1,21 +1,18 @@
 #!/bin/sh
 
-trap cleanup 1 2 3 6
-
-cleanup() {
-# we would like to shutdown everything gracefully in the right order
-    pkill kodi
-    pkill fluxbox
-    pkill Xvnc
-}
+pulseaudio > /dev/null 2>&1 &
 
 vncserver $DISPLAY -noxstartup \
                    -securitytypes none \
                    -geometry 1600x900 \
+                   # kodi doesn't start on lower depth values
                    -depth 24 \
-                   -alwaysshared &
-                   
+                   -alwaysshared > /dev/null 2>&1 &
 
-sleep 3
-startfluxbox -display $DISPLAY > /dev/null 2>&1 &
-kodi-standalone
+/usr/lib/x86_64-linux-gnu/kodi/kodi.bin --standalone  > /dev/null 2>&1 &
+
+while [ ! -f ".kodi/temp/kodi.log" ]; do
+    sleep 0.1
+done
+
+tail -f .kodi/temp/kodi.log

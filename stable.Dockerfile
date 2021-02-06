@@ -12,26 +12,28 @@ RUN apt update && \
     apt -y --purge autoremove
 
 RUN apt install -y --no-install-recommends dumb-init \
-                                           fluxbox \
+                                           pulseaudio \
+                                           ca-certificates \
                                            tigervnc-standalone-server \
                                            tigervnc-xorg-extension \
                                            kodi=2:${KODI_VERSION}+* && \
     apt -y --purge autoremove
+    useradd -m -s /bin/bash kodi
 
 COPY start.sh /
+COPY guisettings.xml /home/kodi/.kodi/userdata/guisettings.xml
 
 RUN chmod +x /start.sh && \
-    useradd -m -s /bin/bash kodi && \
     touch /home/kodi/.Xauthority && \
-    chown -R kodi /home/kodi    
+    chown -R kodi /home/kodi
 
 USER kodi
 WORKDIR /home/kodi
 
+# VNC port
 EXPOSE 5999
+# HTTP port
 EXPOSE 8080
-EXPOSE 9090
-EXPOSE 5555
 
 ENTRYPOINT ["/usr/bin/dumb-init", "--"]
 CMD ["/start.sh"]

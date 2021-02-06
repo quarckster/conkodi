@@ -14,7 +14,7 @@ Kodi GUI. It's not supposed to play video and audio.
     podman build -t kodi -f stable.Dockerfile .
     ```
 
-2. Run it:
+2. Run it:  
 
     ```sh
     podman run --rm -p 5999:5999 -p  localhost/kodi

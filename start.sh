@@ -1,5 +1,7 @@
 #!/bin/sh
 
+umask u=rwx,g=rwx,o=rx
+
 pulseaudio > /dev/null 2>&1 &
 
 vncserver $DISPLAY -noxstartup \

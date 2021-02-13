@@ -33,7 +33,7 @@ EXPOSE 5999
 # HTTP port
 EXPOSE 8080
 # EventServer port
-EXPOSE 9777
+EXPOSE 9777/udp
 
 USER 1001
 ENTRYPOINT ["/usr/bin/dumb-init", "--"]

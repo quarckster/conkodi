@@ -2,11 +2,12 @@
 pulseaudio > /dev/null 2>&1 &
 
 vncserver $DISPLAY -noxstartup \
-                   -securitytypes none \
-                   -geometry 1600x900 \
-                   # kodi doesn't start on lower depth values
-                   -depth 24 \
-                   -alwaysshared > /dev/null 2>&1 &
+                   -securitytypes=none \
+                   -geometry=1600x900 \
+                   -depth=24 \
+                   -alwaysshared \
+                   -localhost=0 \
+                   --I-KNOW-THIS-IS-INSECURE
 
 /usr/lib/x86_64-linux-gnu/kodi/kodi.bin --standalone  > /dev/null 2>&1 &
 

@@ -1,9 +1,9 @@
-FROM ubuntu:20.04
+FROM docker.io/ubuntu:20.04
 
 ARG DEBIAN_FRONTEND=noninteractive
 
 ENV DISPLAY=:99 \
-    HOME=/home/kodi/
+    HOME=/home/kodi
 
 RUN apt update && \
     apt install -y --no-install-recommends software-properties-common && \

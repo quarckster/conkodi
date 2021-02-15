@@ -4,7 +4,7 @@ ARG DEBIAN_FRONTEND=noninteractive
 ARG KODI_VERSION=18.9
 
 ENV DISPLAY=:99 \
-    HOME=/home/kodi/
+    HOME=/home/kodi
 
 RUN apt update && \
     apt install -y --no-install-recommends software-properties-common && \

@@ -9,7 +9,7 @@ vncserver $DISPLAY -noxstartup \
                    -localhost=0 \
                    --I-KNOW-THIS-IS-INSECURE
 
-/usr/lib/x86_64-linux-gnu/kodi/kodi.bin --standalone  > /dev/null 2>&1 &
+kodi --standalone  > /dev/null 2>&1 &
 
 while [ ! -f ".kodi/temp/kodi.log" ]; do
     sleep 0.1

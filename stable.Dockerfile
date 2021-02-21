@@ -1,7 +1,7 @@
 FROM ubuntu:20.04
 
 ARG DEBIAN_FRONTEND=noninteractive
-ARG KODI_VERSION=18.9
+ARG KODI_VERSION
 
 ENV DISPLAY=:99 \
     HOME=/home/kodi

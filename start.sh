@@ -1,13 +1,16 @@
 #!/bin/sh
-pulseaudio > /dev/null 2>&1 &
 
-vncserver $DISPLAY -noxstartup \
-                   -securitytypes=none \
-                   -geometry=1600x900 \
-                   -depth=24 \
-                   -alwaysshared \
-                   -localhost=0 \
-                   --I-KNOW-THIS-IS-INSECURE
+Xvnc ${DISPLAY} \
+     -alwaysshared \
+     -depth 24 \
+     -geometry 1600x900 \
+     -securitytypes none \
+     -auth ${HOME}/.Xauthority \
+     -fp catalogue:/etc/X11/fontpath.d \
+     -pn \
+     -rfbport 5999 2>&1 &
+
+pulseaudio > /dev/null 2>&1 &
 
 kodi --standalone  > /dev/null 2>&1 &
 

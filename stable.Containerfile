@@ -1,29 +1,32 @@
-FROM docker.io/ubuntu:20.04
+FROM docker.io/library/ubuntu:22.04
 
 ARG DEBIAN_FRONTEND=noninteractive
+ARG KODI_VERSION
 
 ENV DISPLAY=:99 \
     HOME=/home/kodi
 
-RUN apt update && \
-    apt install -y --no-install-recommends software-properties-common && \
-    add-apt-repository -y ppa:team-xbmc/xbmc-nightly && \
-    apt -y purge openssl software-properties-common && \
-    apt install -y --no-install-recommends dumb-init \
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends software-properties-common gpg-agent && \
+    add-apt-repository -y ppa:team-xbmc/ppa && \
+    apt-get install -y --no-install-recommends dumb-init \
                                            pulseaudio \
                                            ca-certificates \
                                            tigervnc-standalone-server \
                                            tigervnc-xorg-extension \
-                                           kodi && \
-    apt -y --purge autoremove
+                                           kodi=6:${KODI_VERSION}+* && \
+    apt-get -y purge openssl software-properties-common gpg-agent && \
+    apt-get -y --purge autoremove && \
+    apt-get clean
 
 COPY start.sh /
 COPY guisettings.xml /home/kodi/.kodi/userdata/guisettings.xml
 
 RUN chmod +x /start.sh && \
     touch /home/kodi/.Xauthority && \
-    chgrp -R 0 /home/kodi/ && \
-    chmod -R g=u /home/kodi/
+    mkdir /tmp/.X11-unix && \
+    chgrp -R 0 /home/kodi/ /tmp/.X11-unix/ && \
+    chmod -R g=u /home/kodi/ /tmp/.X11-unix/
 
 WORKDIR /home/kodi
 

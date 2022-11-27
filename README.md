@@ -30,4 +30,4 @@ Kodi GUI. It's not supposed to play video and audio.
 
 You can pull pre-built images from Quay container images registry:
 
-[https://quay.io/repository/quarck/conkodi]
+<https://quay.io/repository/quarck/conkodi>
